@@ -1,0 +1,85 @@
+{% include '_header.twig' %}
+
+<!-- Main Page Content and Sidebar -->
+
+    <!-- Main Blog Content -->
+    <div class="ui piled record segment" role="content">
+
+        {% if taxonomytype is defined %}
+            <h1>
+                {{ __('Overview for') }}
+                {% if taxonomy.options[slug] is defined %}
+                    {{ taxonomy.options[slug] }}
+                {% else %}
+                    {{ slug }}
+                {% endif %}
+            </h1>
+            {% set records = records|order(app.config.get('general/listing_sort')) %}
+        {% endif %}
+
+        {% if search is defined %}
+            <h1>
+                {{ __('Search results for <b> %search% </b>.', { '%search%': search|escape }) }}
+            </h1>
+        {% endif %}
+
+        <div class="ui divided items">
+        {% for record in records %}
+
+            <div class="item">
+                {% if record.image!="" %}
+                    <div class="image">
+                        <a href="{{ image(record.image) }}">
+                            <img class="ui left floated image" src="{{ thumbnail(record.image, 400, 260) }}">
+                        </a>
+                    </div>
+                {% endif %}
+                    <div class="content">
+                        <a class="header"><a href="{{ record.link }}">{{ record.title }}</a></a>
+                        <div class="description">
+                            {% if record.introduction %}
+                                {{ record.introduction }}
+                            {% elseif record.teaser %}
+                                {{ record.teaser }}
+                            {% else %}
+                                <p>{{ record.excerpt(300) }}</p>
+                            {% endif %}
+
+                            {% include '_recordfooter.twig' with {'record': record} %}
+                        </div>
+                    </div>
+                </div>
+
+        {% else %}
+        <div class="ui vertical segment">
+
+
+                {% if search is defined %}
+
+                    <p>
+                        {{ __("No results found for '%search%'. Please try another search.", { '%search%': search|escape }) }}
+                    </p>
+
+                {% else %}
+
+                    <h2>No content found.</h2>
+
+                    <p>
+                        Unfortunately, no content could be found. Try another page, or go to the
+                        <a href="{{ paths.root }}">homepage</a>.
+                    </p>
+
+                {% endif %}
+
+            </div>
+        {% endfor %}
+        </div>
+
+        {{ pager() }}
+
+
+    </div>
+
+<!-- End Main Content and Sidebar -->
+
+{% include '_footer.twig' %}

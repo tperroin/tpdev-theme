@@ -1,0 +1,24 @@
+body {
+    background-color: #F8F8F8;
+    margin: 15px;
+    font-family: "Times New Roman", Georgia, Serif;
+}
+
+header {
+    margin-bottom: 0.5%;
+}
+
+.ui.menu .item {
+    line-height: inherit!important;
+}
+
+.doubling.two.column.row {
+    margin: 20px;
+}
+.ui.piled.record.segment {
+    margin: 2%;
+}
+
+.ui.grid{
+    font-size: 18px;
+}

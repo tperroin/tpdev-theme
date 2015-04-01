@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{ htmllang() }}">
+<head>
+    <meta charset="utf-8"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>
+        {% if record.title is defined %}{{ record.title|striptags }} | {% endif %}
+        {{ app.config.get('general/sitename') }}
+        {% if record.title is not defined and app.config.get('general/payoff') %} | {{ app.config.get('general/payoff') }}{% endif %}
+    </title>
+
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="{{ paths.theme }}css/semantic.min.css">
+    <link rel="stylesheet" href="{{ paths.theme }}css/app.css">
+
+</head>
+<body>
+
+<div class="row">
+    <header>
+        <h1 class="ui header left floated">
+            <img class="ui small image" src="{{ paths.theme }}images/tpdev.png">
+
+            <div class="content">
+                <a href="{{ paths.root }}">{{ app.config.get('general/sitename') }}</a>
+
+                <div class="sub header">{{ app.config.get('general/payoff') }}</div>
+            </div>
+        </h1>
+
+        <h1 class="ui header right floated">
+            {# Include the '_sub_searchbox.twig' template, for the searchbox. If this file wasn't included in the theme, the default searchbox template in app/theme_defaults/_sub_searchbox.twig would be used. #}
+            {% include '_sub_searchbox.twig' %}
+        </h1>
+    </header>
+</div>
+
+<div class="ui grid">
+
+    <div class="sixteen wide column">
+        <div class="ui blue large menu">
+            {# Include the menu, as defined in config/menu.yml. Note that this theme comes with it's own _sub_menu.twig. If this file wasn't included in the current theme, the default menu template in app/theme_defaults/_sub_menu.twig would be used. #}
+            {{ menu('main', '_sub_menu.twig') }}
+
+
+        </div>
+    </div>
