@@ -22,3 +22,7 @@ header {
 .ui.grid{
     font-size: 18px;
 }
+
+.right {
+    float: right;
+}
